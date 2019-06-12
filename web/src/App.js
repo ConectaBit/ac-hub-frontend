@@ -4,7 +4,12 @@ import Header from "./components/header";
 function App() {
   return (
     <>
-      <Header />
+      <Header
+        firstItem={{ label: "Explore" }}
+        secondItem={{ label: "Outras Bases" }}
+        thirdItem={{ label: "Login" }}
+        button={{ label: "Cadastre-se" }}
+      />
     </>
   );
 }

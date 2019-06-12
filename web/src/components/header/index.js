@@ -27,7 +27,7 @@ const Item = styled.span`
   flex: 1;
   margin: auto 1.5rem;
   color: #6b6b6b;
-  transition: 0.6s;
+  transition: 0.3s;
 
   :hover {
     cursor: pointer;
@@ -35,9 +35,9 @@ const Item = styled.span`
   }
 `;
 
-const LoginButton = styled.div`
+const Button = styled.div`
   font-family: "Varela Round", sans-serif;
-  transition: 0.5s;
+  transition: 0.3s;
   text-decoration: none;
   align-content: center;
   padding: 1.5rem 5rem;
@@ -65,7 +65,7 @@ const Logo = styled.svg`
   color: #59d9d9;
 `;
 
-function Header() {
+function Header(props) {
   return (
     <Wrapper>
       <ItemsGroup>
@@ -83,14 +83,14 @@ function Header() {
             />
           </Logo>
         </Item>
-        <Item>Explorar</Item>
-        <Item>Outras Bases</Item>
+        <Item>{props.firstItem ? props.firstItem.label : null}</Item>
+        <Item>{props.secondItem ? props.secondItem.label : null}</Item>
       </ItemsGroup>
       <ItemsGroup>
-        <Item>Login</Item>
-        <LoginButton primary>
-          <span>Cadastre-se</span>
-        </LoginButton>
+        <Item>{props.thirdItem ? props.thirdItem.label : null}</Item>
+        <Button primary>
+          <span>{props.button ? props.button.label : null}</span>
+        </Button>
       </ItemsGroup>
     </Wrapper>
   );
