@@ -1,9 +1,11 @@
-import React from 'react';
-import Card from './components/cards'
+import React from "react";
+import Header from "./components/header";
 
 function App() {
   return (
-    <Card title='adfadadf' urlImage='https://cdn.pensador.com/img/authors/ca/rl/carl-sagan-l.jpg'/>
+    <>
+      <Header />
+    </>
   );
 }
 
