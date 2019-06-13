@@ -6,6 +6,7 @@ import { storiesOf } from "@storybook/react";
 
 import Header from "../src/components/header";
 import Card from "../src/components/card";
+import Cover from '../src/components/cover'
 
 storiesOf("Header", module)
   .add("without props", () => <Header />)
@@ -19,11 +20,11 @@ storiesOf("Header", module)
   ))
   .add("with props logged true", () => (
     <Header
-			isLogged={true}
+      isLogged={true}
       firstItem={{ label: "Explorar" }}
       secondItem={{ label: "Outras Bases" }}
       thirdItem={{ label: "Login" }}
-      button={{ label: "Cadastre-se" }}
+      button={{ label: "username" }}
     />
   ));
 
@@ -35,6 +36,13 @@ storiesOf("Card", module)
       urlImage="https://pbs.twimg.com/media/D30x2DjXoAI2TW7.jpg"
     />
   ))
-  .add("loading", () => (
-    <Card isLoading={true}/>
-  ))
+  .add("loading", () => <Card isLoading={true} />);
+
+storiesOf("Cover", module)
+		.add("without props", () => (
+			<Cover />
+		))
+		.add('with user props', () => (
+			<Cover photoUrl='https://media.beliefnet.com/~/media/photos/entertainment/galleries/10-greatest-spiritual-characters-in-science-fiction/yoda-starwarsjpg.jpg?as=1&w=400'
+			text='yoda_master'/>
+		))
