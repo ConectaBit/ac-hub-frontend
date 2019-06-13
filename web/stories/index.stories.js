@@ -44,5 +44,5 @@ storiesOf("Cover", module)
 		))
 		.add('with user props', () => (
 			<Cover photoUrl='https://media.beliefnet.com/~/media/photos/entertainment/galleries/10-greatest-spiritual-characters-in-science-fiction/yoda-starwarsjpg.jpg?as=1&w=400'
-			text='yoda_master'/>
+			text='mestre_yoda'/>
 		))
