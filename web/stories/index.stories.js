@@ -1,19 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
 
-import { Button, Welcome } from '@storybook/react/demo';
+import Header from "../src/components/header";
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
-
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => (
-    <Button onClick={action('clicked')}>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
+storiesOf("Header", module)
+  .add("without props", () => <Header />)
+  .add("with items props", () => (
+    <Header
+      firstItem={{ label: "Explorar" }}
+      secondItem={{ label: "Outras Bases" }}
+      thirdItem={{ label: "Login" }}
+      button={{ label: "Cadastre-se" }}
+    />
   ));

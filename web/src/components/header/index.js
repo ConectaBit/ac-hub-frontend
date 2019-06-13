@@ -38,6 +38,7 @@ const Item = styled.span`
 const Button = styled.div`
   font-family: "Varela Round", sans-serif;
   transition: 0.3s;
+  white-space: nowrap;
   text-decoration: none;
   align-content: center;
   padding: 1.5rem 5rem;
