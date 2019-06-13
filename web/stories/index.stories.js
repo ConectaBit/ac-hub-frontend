@@ -34,4 +34,7 @@ storiesOf("Card", module)
       title="Phisics"
       urlImage="https://pbs.twimg.com/media/D30x2DjXoAI2TW7.jpg"
     />
-  ));
+  ))
+  .add("loading", () => (
+    <Card isLoading={true}/>
+  ))

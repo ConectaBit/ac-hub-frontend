@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-
+import { RingSpinner } from "react-spinners-kit";
 const Content = styled.div`
+  display: flex;
+  justify-content: center;
   background-color: black;
   border-radius: 0.8rem;
   height: 40rem;
@@ -40,7 +42,11 @@ const Content = styled.div`
 function Card(props) {
   return (
     <Content urlImage={props.urlImage}>
-      <h2>{props.title}</h2>
+      {props.isLoading === true ? (
+        <RingSpinner color="#C876E8" size={10} sizeUnit="rem" />
+      ) : (
+        <h2>{props.title}</h2>
+      )}
     </Content>
   );
 }
