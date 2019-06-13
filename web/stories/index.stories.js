@@ -16,6 +16,15 @@ storiesOf("Header", module)
       thirdItem={{ label: "Login" }}
       button={{ label: "Cadastre-se" }}
     />
+  ))
+  .add("with props logged true", () => (
+    <Header
+			isLogged={true}
+      firstItem={{ label: "Explorar" }}
+      secondItem={{ label: "Outras Bases" }}
+      thirdItem={{ label: "Login" }}
+      button={{ label: "Cadastre-se" }}
+    />
   ));
 
 storiesOf("Card", module)
