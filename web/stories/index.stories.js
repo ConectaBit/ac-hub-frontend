@@ -6,7 +6,8 @@ import { storiesOf } from "@storybook/react";
 
 import Header from "../src/components/header";
 import Card from "../src/components/card";
-import Cover from '../src/components/cover'
+import Cover from "../src/components/cover";
+import RepoList from "../src/components/repoList";
 
 storiesOf("Header", module)
   .add("without props", () => <Header />)
@@ -39,10 +40,11 @@ storiesOf("Card", module)
   .add("loading", () => <Card isLoading={true} />);
 
 storiesOf("Cover", module)
-		.add("without props", () => (
-			<Cover />
-		))
-		.add('with user props', () => (
-			<Cover photoUrl='https://media.beliefnet.com/~/media/photos/entertainment/galleries/10-greatest-spiritual-characters-in-science-fiction/yoda-starwarsjpg.jpg?as=1&w=400'
-			text='mestre_yoda'/>
-		))
+  .add("without props", () => <Cover />)
+  .add("with user props", () => (
+    <Cover
+      photoUrl="https://media.beliefnet.com/~/media/photos/entertainment/galleries/10-greatest-spiritual-characters-in-science-fiction/yoda-starwarsjpg.jpg?as=1&w=400"
+      text="mestre_yoda"
+    />
+  ));
+storiesOf("RepoList", module).add("with repos list", () => <RepoList />);

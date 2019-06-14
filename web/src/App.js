@@ -1,16 +1,12 @@
 import React from "react";
-import Header from "./components/header";
+//import Header from "./components/header";
+import RepoList from './components/repoList'
 
 function App() {
   return (
     <>
       <div>
-        <Header
-          firstItem={{ label: "Explore" }}
-          secondItem={{ label: "Outras Bases" }}
-          thirdItem={{ label: "Login" }}
-          button={{ label: "Cadastre-se" }}
-        />
+        <RepoList />
       </div>
     </>
   );
