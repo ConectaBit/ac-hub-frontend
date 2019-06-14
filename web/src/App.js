@@ -1,13 +1,12 @@
-import React from "react";
-//import Header from "./components/header";
-import RepoList from './components/repoList'
+import React, {useState} from "react";
+import SideBar from './components/sideBar'
 
 function App() {
-  return (
-    <>
-      <div>
-        <RepoList />
-      </div>
+
+  const [show, setShow] = useState(false);
+  return (<>
+    <button onClick={() => setShow(!show)}>Show/Hide</button>
+    <SideBar show={show} />
     </>
   );
 }

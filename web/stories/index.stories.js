@@ -8,6 +8,7 @@ import Header from "../src/components/header";
 import Card from "../src/components/card";
 import Cover from "../src/components/cover";
 import RepoList from "../src/components/repoList";
+import SideBar from "../src/components/sideBar";
 
 storiesOf("Header", module)
   .add("without props", () => <Header />)
@@ -48,3 +49,7 @@ storiesOf("Cover", module)
     />
   ));
 storiesOf("RepoList", module).add("with repos list", () => <RepoList />);
+
+storiesOf("SideBar", module)
+  .add("without props", () => <SideBar />)
+  .add('with show prop', () => <SideBar show={true}/>);
