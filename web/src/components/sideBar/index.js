@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import MenuButton from './menuButton'
 import styled from "styled-components";
-import { ArrowBackOutline } from 'styled-icons/typicons/ArrowBackOutline'
+import { ArrowBackOutline } from "styled-icons/typicons/ArrowBackOutline";
 
 const Menu = styled.div`
   display: flex;
@@ -41,15 +42,15 @@ const Button = styled.button`
   box-sizing: border-box;
   padding: 1rem;
   border: none;
-  background-color: #6175E8;
+  background-color: #6175e8;
   color: #ffffff;
   width: 20rem;
   margin: 0 auto;
-  transition: all .5s;
+  transition: all 0.5s;
 
-  :hover{
-      opacity: .9;
-      cursor: pointer;
+  :hover {
+    opacity: 0.9;
+    cursor: pointer;
   }
 `;
 
@@ -67,25 +68,36 @@ const Logo = styled.svg`
 `;
 
 const IconBack = styled(ArrowBackOutline)`
-    color: #FFF;
-    margin: auto;
-    border: 1px solid transparent;
+  color: #fff;
+  margin: auto;
+  border: 1px solid transparent;
 
-    :hover{
-        color: #B8C2FF;
-        cursor: pointer;
-        transition: all .5s;
-    }
+  :hover {
+    color: #b8c2ff;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
 `;
 
 function SideBar(props) {
+  const [show, setShow] = useState(false);
+
+  function toggleMenu() {
+    setShow(!show);
+  }
+
+  function handleMouseDown(e) {
+    toggleMenu();
+    console.log('clicked');
+    e.stopPropagation();
+  }
+
   return (
-    <Menu show={props.show}>
+    <>
+    <MenuButton handleMouseDown={handleMouseDown}/>
+    <Menu show={show} handleMouseDown={handleMouseDown}>
       <Flex>
-        <Logo
-          viewBox="0 0 346 346"
-          fill="none"
-        >
+        <Logo viewBox="0 0 346 346" fill="none">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -95,9 +107,10 @@ function SideBar(props) {
         </Logo>
         <Input placeholder="Usuário" />
         <Input placeholder="Senha" type="password" />
-        <Button>Entrar</Button>
+        <Button onMouseDown={() => toggleMenu()}>Entrar</Button>
       </Flex>
     </Menu>
+    </>
   );
 }
 

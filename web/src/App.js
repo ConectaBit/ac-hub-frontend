@@ -1,12 +1,9 @@
 import React, {useState} from "react";
-import SideBar from './components/sideBar'
+import SideBar from './components/sideBar/index'
 
 function App() {
-
-  const [show, setShow] = useState(false);
   return (<>
-    <button onClick={() => setShow(!show)}>Show/Hide</button>
-    <SideBar show={show} />
+    <SideBar  />
     </>
   );
 }
