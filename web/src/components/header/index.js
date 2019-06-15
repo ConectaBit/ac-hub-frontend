@@ -20,16 +20,12 @@ const ItemsGroup = styled.div`
 `;
 
 const Item = styled.div`
-  @import url("https://fonts.googleapis.com/css?family=Varela+Round&display=swap");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
   background-color: transparent;
-
   white-space: nowrap;
-  font-family: "Varela Round", sans-serif;
   font-size: 1.2rem;
   flex: 1;
   height: 100%;
