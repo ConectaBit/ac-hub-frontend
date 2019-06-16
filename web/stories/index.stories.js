@@ -9,6 +9,7 @@ import Card from "../src/components/card";
 import Cover from "../src/components/cover";
 import RepoList from "../src/components/repoList";
 import SideBar from "../src/components/sideBar";
+import Markdown from "../src/components/markdown";
 
 storiesOf("Header", module)
   .add("without props", () => <Header />)
@@ -52,4 +53,6 @@ storiesOf("RepoList", module).add("with repos list", () => <RepoList />);
 
 storiesOf("SideBar", module)
   .add("without props", () => <SideBar />)
-  .add('with show prop', () => <SideBar show={true}/>);
+  .add("with show prop", () => <SideBar show={true} />);
+
+storiesOf("Editor", () => module).add("without props", () => <Markdown />);
