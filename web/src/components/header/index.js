@@ -7,10 +7,9 @@ const Wrapper = styled.header`
   width: 100vw;
   display: flex;
   background-color: ${props =>
-    props.isLogged === true ? "#59D9D9" : "#FFFFFF"};
+  props.isLogged === true ? "#59D9D9" : "#FFFFFF"};
   border-top: 1px dotted #ccc;
   border-bottom: 1px dotted #ccc;
-  position: fixed;
   justify-content: space-between;
 `;
 
@@ -106,7 +105,7 @@ function Header(props) {
           {props.thirdItem ? props.thirdItem.label : null}
         </Item>
         <Button isLogged={props.isLogged}>
-          <span>{props.button ? props.button.label : null}</span>
+          <span>{props.children}</span>
         </Button>
       </ItemsGroup>
     </Wrapper>

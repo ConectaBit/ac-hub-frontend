@@ -1,12 +1,10 @@
-import React, {useState} from "react";
-import SideBar from './components/sideBar/index'
-import Markdown from './components/markdown'
-
-import GlobalStyle from './styles/global'
+import React from "react";
+import GlobalStyle from './styles/global';
+import Home from './pages/home'
 function App() {
   return (<>
   <GlobalStyle />
-    <Markdown />
+    <Home />
     </>
   );
 }
