@@ -20,18 +20,17 @@ const Layout = styled.div`
 `;
 
 const Box = styled.div`
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
+  justify-items: center;
+  align-items: center;
   width: 30%;
   height: 100%;
-  justify-items: center;
-  margin-top: 3rem;
   text-align: center;
   align-self: flex-end;
-  align-items: center;
-  margin: auto 0;
-  z-index: 0.1;
-  background-color: #FFFFFF;
+  margin: 0;
+  background-color: #ffffff;
   box-sizing: border-box;
 `;
 
@@ -61,11 +60,11 @@ const Menu = styled.div`
   }
 `;
 
-// const Logo = styled.svg`
-//  flex: 1;
-//  height: 20rem;
-//  margin: auto 1rem;
-// `;
+const Logo = styled.svg`
+  flex: 1;
+  height: 20rem;
+  margin: auto 1rem;
+`;
 
 const IconGit = styled(Github)`
   color: white;
@@ -74,33 +73,55 @@ const IconGit = styled(Github)`
 `;
 
 const Input = styled.input`
-  border: 1px solid #ccc;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #72f0b8;
   padding: 0.9rem;
   font-size: 1rem;
   width: 20rem;
-  margin: 0.2rem;
+  margin: 0.5rem;
+  transition: all .5s;
+
+  :focus{
+    border-bottom: 1px solid red;
+  }
 `;
 
-const Title = styled.h1`
+const Title = styled.span`
   font-size: 3rem;
   text-align: center;
-  font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  color: #ccc;
 `;
 
 const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0.5rem auto;
+  height: 70%;
 `;
 
 const ButtonLogin = styled.button`
+  background-color: rgb(125, 76, 219);
+  border: none;
+  padding: 1rem;
+  color: white;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  flex: 1;
+  transition: all .5s;
 
+  :hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 `;
 
-const ButtonRegister = styled.button``;
-
-const Flex = styled.div``;
+const Flex = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 0.3rem;
+  align-items: stretch;
+`;
 
 function Home() {
   return (
@@ -115,11 +136,9 @@ function Home() {
         </span>
       </Menu>
       <Box>
-        {/*<Logo
-            viewBox="0 0 346 346"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+        <LoginForm>
+          <Title>Login</Title>
+          <Logo viewBox="0 0 346 346" fill="none">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -127,13 +146,9 @@ function Home() {
               fill="#59d9d9"
             />
           </Logo>
-         */}
-        <LoginForm>
-          <Title>Login</Title>
           <Input type="text" placeholder="Email" />
-          <Input type="texy" placeholder="Senha" />
+          <Input type="password" placeholder="Senha" />
           <Flex>
-            <ButtonRegister>Cadastre-se</ButtonRegister>
             <ButtonLogin>Entrar</ButtonLogin>
           </Flex>
         </LoginForm>
