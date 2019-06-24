@@ -138,7 +138,8 @@ function Home() {
         <SideBar>
           <span>Cadastre-se</span>
         </SideBar>
-        <span>Entre</span>
+        <span>Explorar</span>
+        <span>Outras Bases</span>
       </Menu>
       <Box>
         <LoginForm>
