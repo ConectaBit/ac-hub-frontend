@@ -40,7 +40,7 @@ const BackButton = styled.button`
   :hover {
     cursor: pointer;
     background-color: rgb(125, 76, 219);
-    color: #FFF;
+    color: #fff;
   }
 `;
 
@@ -74,12 +74,13 @@ const Box = styled.div`
 
 const Flex = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${props => props.direction};
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   flex: 3;
   background-color: #fff;
 `;
@@ -92,8 +93,9 @@ const Input = styled.input`
   outline: 0;
   border-bottom: 1px solid #72f0b8;
   margin: 1rem auto;
+  transition: all 0.5s;
 
-  :focus{
+  :focus {
     border-bottom: 1px solid red;
   }
 `;
@@ -122,8 +124,8 @@ function SideBar(props) {
           <Input type="password" placeholder="Senha" />
           <Input type="text" placeholder="Instituição" />
           <Flex>
-          <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
-          <RegisterButton>Pronto</RegisterButton>
+            <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
+            <RegisterButton>Avançar</RegisterButton>
           </Flex>
         </Form>
       </Menu>
