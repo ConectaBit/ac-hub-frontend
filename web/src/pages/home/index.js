@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import "./logo.svg";
 import { Github } from "styled-icons/boxicons-logos/Github";
-//import Fade from "react-reveal/Fade";
 import SideBar from "../../components/sideBar";
-//import MenuButton from "../../components/sideBar/menuButton";
 
 const Layout = styled.div`
   display: flex;
