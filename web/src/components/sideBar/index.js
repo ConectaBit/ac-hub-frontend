@@ -19,9 +19,32 @@ const Menu = styled.div`
   background-color: #1a4040;
   background-position: center;
   background-blend-mode: overlay;
+
+  :hover {
+    cursor: auto;
+  }
 `;
 
-const Button = styled.button`
+const BackButton = styled.button`
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  border: 2px solid rgb(125, 76, 219);
+  color: rgb(125, 76, 219);
+  width: 20rem;
+  margin: 0 auto;
+  transition: all 0.5s;
+  background-color: transparent;
+
+  :hover {
+    cursor: pointer;
+    background-color: rgb(125, 76, 219);
+    color: #FFF;
+  }
+`;
+
+const RegisterButton = styled.button`
   font-size: 1rem;
   border-radius: 0.3rem;
   box-sizing: border-box;
@@ -34,15 +57,9 @@ const Button = styled.button`
   transition: all 0.5s;
 
   :hover {
-    opacity: 0.9;
+    opacity: 0.7;
     cursor: pointer;
   }
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex: 3;
-  background-color: #FFF;
 `;
 
 const Box = styled.div`
@@ -50,9 +67,35 @@ const Box = styled.div`
   flex: 1;
   background-color: #fff;
   align-self: flex-end;
-  background-image: url('https://i.pinimg.com/originals/b0/2e/89/b02e8993d9a498bef8130255beed11e8.jpg');
+  background-image: url("https://i.pinimg.com/originals/b0/2e/89/b02e8993d9a498bef8130255beed11e8.jpg");
   background-size: cover;
-  background-position: center; 
+  background-position: center;
+`;
+
+const Flex = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  background-color: #fff;
+`;
+
+const Input = styled.input`
+  width: 80%;
+  font-size: 1.5rem;
+  padding: 1rem;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #72f0b8;
+  margin: 1rem auto;
+
+  :focus{
+    border-bottom: 1px solid red;
+  }
 `;
 
 function SideBar(props) {
@@ -74,7 +117,14 @@ function SideBar(props) {
       <Menu show={show} handleMouseDown={handleMouseDown}>
         <Box />
         <Form>
-        <Button onClick={() => toggleMenu()}>Voltar</Button>
+          <Input type="text" placeholder="Nome de usuário" />
+          <Input type="email" placeholder="Email" />
+          <Input type="password" placeholder="Senha" />
+          <Input type="text" placeholder="Instituição" />
+          <Flex>
+          <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
+          <RegisterButton>Pronto</RegisterButton>
+          </Flex>
         </Form>
       </Menu>
     </>
