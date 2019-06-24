@@ -19,6 +19,15 @@ const Layout = styled.div`
   background-blend-mode: luminosity;
 `;
 
+const Footer = styled.footer`
+  text-align: center;
+  margin-top: 6rem;
+  span{
+    font-size: .8rem;
+    color: #ccc;
+  }
+`;
+
 const Box = styled.div`
   padding-top: 2rem;
   display: flex;
@@ -67,9 +76,10 @@ const Logo = styled.svg`
 `;
 
 const IconGit = styled(Github)`
-  color: white;
+  color: inherit;
   width: 1rem;
   height: 1rem;
+  margin: auto .3rem;
 `;
 
 const Input = styled.input`
@@ -97,7 +107,7 @@ const Title = styled.span`
 const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
-  height: 70%;
+  height: 80%;
 `;
 
 const ButtonLogin = styled.button`
@@ -131,9 +141,6 @@ function Home() {
           <span>Cadastre-se</span>
         </SideBar>
         <span>Entre</span>
-        <span>
-          <IconGit />
-        </span>
       </Menu>
       <Box>
         <LoginForm>
@@ -152,6 +159,10 @@ function Home() {
             <ButtonLogin>Entrar</ButtonLogin>
           </Flex>
         </LoginForm>
+        <Footer>
+          <span>&copy; 2019 WTCS - Elixir</span>
+          <IconGit />
+        </Footer>
       </Box>
     </Layout>
   );
