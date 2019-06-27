@@ -12,7 +12,7 @@ export default createGlobalStyle`
         @import url("https://fonts.googleapis.com/css?family=Varela+Round&display=swap");
         font-family: "Varela Round", sans-serif;
         font-size: 12px;
-        background: #FFF;
+        background: #f4f4f7;;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
     }

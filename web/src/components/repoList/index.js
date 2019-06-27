@@ -56,9 +56,9 @@ const IconBook = styled(BookContent)`
 function RepoList() {
   const [repos, setRepos] = useState(null);
 
-  function handleReposReceived(repolist) {
-    setRepos(repolist);
-  }
+  //function handleReposReceived(repolist) {
+  //  setRepos(repolist);
+  //}
 
   return (
     <Box>
