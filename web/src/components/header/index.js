@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { HomeAlt } from "styled-icons/boxicons-regular/HomeAlt";
 import { Wpexplorer } from "styled-icons/fa-brands/Wpexplorer";
-import { Add } from "styled-icons/material/Add";
 import { Group } from "styled-icons/material/Group";
 
 const HomeIcon = styled(HomeAlt)`
@@ -16,16 +15,6 @@ const HomeIcon = styled(HomeAlt)`
 `;
 
 const ExploreIcon = styled(Wpexplorer)`
-  width: 2rem;
-  height: 2rem;
-  color: #2e9fff;
-
-  :hover {
-    cursor: pointer;
-  }
-`;
-
-const AddIcon = styled(Add)`
   width: 2rem;
   height: 2rem;
   color: #2e9fff;
@@ -70,7 +59,6 @@ function Header() {
         <HomeIcon />
         <ExploreIcon />
         <GroupIcon />
-        <AddIcon />
       </IconsWrapper>
     </Wrapper>
   );

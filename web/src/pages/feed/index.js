@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Add } from "styled-icons/material/Add";
 import Header from "../../components/header";
 import RepoList from "../../components/repoList";
 import UserInfo from "../../components/userInfo";
@@ -23,6 +24,36 @@ const CenterBox = styled.div`
   margin-left: 15rem;
 `;
 
+const AddIcon = styled(Add)`
+  width: 2rem;
+  height: 2rem;
+  color: #2e9fff;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const WriteButton = styled.button`
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 0;
+  background-color: #fff;
+
+  position: fixed;
+
+  bottom: 2rem;
+  right: 2rem;
+
+  transition: all .3s;
+
+  :hover{
+    cursor: pointer;
+    width: 5rem;
+    height: 5rem;
+  }
+`;
+
 function Feed() {
   return (
     <>
@@ -40,6 +71,9 @@ function Feed() {
           <PostInfo />
           <PostInfo />
         </CenterBox>
+        <WriteButton>
+          <AddIcon />
+        </WriteButton>
       </Layout>
     </>
   );
