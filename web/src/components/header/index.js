@@ -51,6 +51,8 @@ const Wrapper = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  position: static;
+  top:0;
 `;
 
 const IconsWrapper = styled.div`
