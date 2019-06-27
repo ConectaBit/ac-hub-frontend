@@ -5,6 +5,7 @@ import Header from "../../components/header";
 import RepoList from "../../components/repoList";
 import UserInfo from "../../components/userInfo";
 import PostInfo from "../../components/postInfo";
+import AddArticle from '../../components/addArticle'
 
 const Layout = styled.div`
   display: flex;
@@ -71,9 +72,13 @@ function Feed() {
           <PostInfo />
           <PostInfo />
         </CenterBox>
+
+        <AddArticle>
         <WriteButton>
           <AddIcon />
         </WriteButton>
+        </AddArticle>
+  
       </Layout>
     </>
   );
