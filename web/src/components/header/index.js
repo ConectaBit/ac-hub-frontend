@@ -10,7 +10,7 @@ const HomeIcon = styled(HomeAlt)`
   height: 2rem;
   color: #2e9fff;
 
-  :hover{
+  :hover {
     cursor: pointer;
   }
 `;
@@ -20,7 +20,7 @@ const ExploreIcon = styled(Wpexplorer)`
   height: 2rem;
   color: #2e9fff;
 
-  :hover{
+  :hover {
     cursor: pointer;
   }
 `;
@@ -30,7 +30,7 @@ const AddIcon = styled(Add)`
   height: 2rem;
   color: #2e9fff;
 
-  :hover{
+  :hover {
     cursor: pointer;
   }
 `;
@@ -40,7 +40,7 @@ const GroupIcon = styled(Group)`
   height: 2rem;
   color: #2e9fff;
 
-  :hover{
+  :hover {
     cursor: pointer;
   }
 `;
@@ -51,8 +51,9 @@ const Wrapper = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  position: static;
-  top:0;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
 `;
 
 const IconsWrapper = styled.div`

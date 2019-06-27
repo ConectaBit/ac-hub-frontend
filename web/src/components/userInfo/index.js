@@ -8,6 +8,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin-bottom: 0.5rem;
   border-radius: 5px;
+  position: fixed;
+  top: 3rem;
 `;
 
 const UserPhoto = styled.img`

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../../components/header";
-import RepoList from '../../components/repoList';
-import UserInfo from '../../components/userInfo'
+import RepoList from "../../components/repoList";
+import UserInfo from "../../components/userInfo";
+import PostInfo from "../../components/postInfo";
 
 const Layout = styled.div`
   display: flex;
@@ -17,15 +18,28 @@ const LeftBox = styled.div`
   flex-direction: column;
 `;
 
+const CenterBox = styled.div`
+  width: 100%;
+  margin-left: 15rem;
+`;
+
 function Feed() {
   return (
     <>
       <Header />
       <Layout>
         <LeftBox>
-        <UserInfo />
-        <RepoList />
+          <UserInfo />
+          <RepoList />
         </LeftBox>
+        <CenterBox>
+          <PostInfo />
+          <PostInfo />
+          <PostInfo />
+          <PostInfo />
+          <PostInfo />
+          <PostInfo />
+        </CenterBox>
       </Layout>
     </>
   );

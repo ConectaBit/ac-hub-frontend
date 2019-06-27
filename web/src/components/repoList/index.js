@@ -14,6 +14,8 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  top: 17.5rem;
+  position: fixed;
 
   span {
     font-family: "Varela Round", sans-serif;
