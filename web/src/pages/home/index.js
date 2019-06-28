@@ -5,6 +5,9 @@ import { Github } from "styled-icons/boxicons-logos/Github";
 import SideBar from "../../components/sideBar";
 import gql from "graphql-tag";
 import {useMutation} from '@apollo/react-hooks'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { NavLink, Redirect } from "react-router-dom";
 
 const Layout = styled.div`
   display: flex;
@@ -145,11 +148,21 @@ function Home() {
   const [pass, setPass] = useState("");
 
   const [createToken, {data, loading, error}] = useMutation(CREATE_TOKEN_MUTATION, {variables: {email: email, password: pass}})
-  console.log(data)
-  console.log(error)
+
+  toast.configure()
+  const notify = () => toast.warn("Prencha os campos corretamente");
 
   function validateForm(){
-    return (!email || !pass) ? console.log('camposObrigatórios') : createToken()
+    if(error){
+      toast.error("Email ou senha incorretos")
+    }
+
+    if(data){
+      const token = data.createToken.token;
+      localStorage.setItem("access-token", token)
+      toast.success("Bem vindo, carái")
+    }
+    return (!email || !pass) ? notify() : createToken()
   }
   return (
     <Layout>
@@ -248,7 +261,7 @@ function Home() {
             onChange={e => setPass(e.target.value)}
           />
           <Flex>
-            <ButtonLogin onClick={() => validateForm() } >Entrar</ButtonLogin>
+            <ButtonLogin onClick={() => validateForm()} >Entrar</ButtonLogin>
           </Flex>
         </LoginForm>
         <Footer>
