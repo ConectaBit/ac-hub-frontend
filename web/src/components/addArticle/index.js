@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import AddButton from "./addButton";
 import styled from "styled-components";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Menu = styled.div`
   display: flex;
@@ -67,8 +71,9 @@ const Box = styled.div`
   flex: 2;
   background-color: #fff;
   align-self: flex-end;
-  background-image: url("http://studioclio.com.br/sites/default/files/imagens/evento/platao_e_aristoteles.jpg");
+  background-image: url("https://mymodernmet.com/wp/wp-content/uploads/2018/08/leonardo-da-vinci-vitruvian-man-1.jpg");
   background-size: cover;
+  background-blend-mode: luminosity;
   background-position: center;
 `;
 
@@ -114,13 +119,62 @@ const Select = styled.select`
     border-bottom: 1px solid red;
   }
 
-  option{
+  option {
     background-color: transparent;
+  }
+`;
+
+const CREATE_ARTICLE_MUTATION = gql`
+  mutation createPost(
+    $title: String!
+    $description: String!
+    $content: String!
+  ) {
+    createPost(
+      input: {
+        title: $title
+        content: $description
+        description: $content
+      }
+    ) {
+      title
+      content
+      description
+    }
   }
 `;
 
 function AddArticle(props) {
   const [show, setShow] = useState(false);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [content, setContent] = useState("Matemática");
+
+  const [createArticle, { data, error }] = useMutation(
+    CREATE_ARTICLE_MUTATION,
+    {
+      variables: {
+        title: title,
+        description: description,
+        content: content
+      }
+    }
+  );
+
+  toast.configure();
+
+  function add(){
+    createArticle();
+    if(data) {
+      toast.success("Trabalho criado com sucesso!")
+      setShow(!show);
+      toast.warn("Agora você pode adicionar elementos ao seu trabalho")
+    }
+
+    if(error) {
+      toast.error('Algo errado não está certo ')
+    }
+  }
 
   function toggleMenu() {
     setShow(!show);
@@ -138,17 +192,20 @@ function AddArticle(props) {
       <Menu show={show} handleMouseDown={handleMouseDown}>
         <Box />
         <Form>
-          <Input type="text" placeholder="Adicione um título ao seu trabalho" />
-          <Input type="textarea" placeholder="Agora uma pequena descrição" />
-          <Select>
-            <option value='Matemática'>Matemática</option>
-            <option value='Biologia'>Biologia</option>
-            <option value='Química'>Química</option>
-            <option value='Física'>Física</option>
+          <Input type="text" placeholder="Adicione um título ao seu trabalho" onChange={e => setTitle(e.target.value)} />
+          <Input type="textarea" placeholder="Agora uma pequena descrição" onChange={e => setDescription(e.target.value)} />
+          <Select
+            onChange={e => setContent(e.target.value)}
+            defaultValue={content}
+          >
+            <option value="Matemática">Matemática</option>
+            <option value="Biologia">Biologia</option>
+            <option value="Química">Química</option>
+            <option value="Física">Física</option>
           </Select>
           <Flex>
             <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
-            <RegisterButton>Avançar</RegisterButton>
+            <RegisterButton onClick={() => add()}>Avançar</RegisterButton>
           </Flex>
         </Form>
       </Menu>

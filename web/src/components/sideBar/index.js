@@ -129,21 +129,28 @@ function SideBar(props) {
 
   const [createUser, { data, loading, error }] = useMutation(
     CREATE_USER_MUTATION,
-    { variables: {name: userName, email: email, password: password, class: inst} }
+    {
+      variables: {
+        name: userName,
+        email: email,
+        password: password,
+        class: inst
+      }
+    }
   );
 
-  toast.configure()
+  toast.configure();
 
-  function register(){
-    createUser()
-    if(data){
-      toast.success(`Usuário criado com sucesso!`)
-      setShow(!show)
-      toast.warn("Entre com seu email e senha para continuar")
+  function register() {
+    createUser();
+    if (data) {
+      toast.success('Usuário criado com sucesso!');
+      setShow(!show);
+      toast.warn("Entre com seu email e senha para continuar");
     }
 
-    if(error){
-      toast.error(`Este email já está cadastrado`)
+    if (error) {
+      toast.error(`Este email já está cadastrado`);
     }
   }
 
