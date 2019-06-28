@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { HomeAlt } from "styled-icons/boxicons-regular/HomeAlt";
 import { Wpexplorer } from "styled-icons/fa-brands/Wpexplorer";
 import { Group } from "styled-icons/material/Group";
+import { LogOut } from "styled-icons/feather/LogOut";
+import { Link } from "react-router-dom";
 
 const HomeIcon = styled(HomeAlt)`
   width: 2rem;
@@ -34,6 +36,17 @@ const GroupIcon = styled(Group)`
   }
 `;
 
+const LogoutIcon = styled(LogOut)`
+  width: 2rem;
+  height: 2rem;
+  color: #ff5047;
+  align-self: center;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 const Wrapper = styled.header`
   height: 2.5rem;
   border-bottom: 1px solid #ccc;
@@ -59,6 +72,9 @@ function Header() {
         <HomeIcon />
         <ExploreIcon />
         <GroupIcon />
+        <Link to='logout'>
+        <LogoutIcon />
+        </Link>
       </IconsWrapper>
     </Wrapper>
   );
