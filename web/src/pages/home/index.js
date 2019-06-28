@@ -7,7 +7,7 @@ import gql from "graphql-tag";
 import {useMutation} from '@apollo/react-hooks'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const Layout = styled.div`
   display: flex;
@@ -161,6 +161,7 @@ function Home() {
       const token = data.createToken.token;
       localStorage.setItem("access-token", token)
       toast.success("Bem vindo, carái")
+      return <Redirect to="/feed" />
     }
     return (!email || !pass) ? notify() : createToken()
   }
