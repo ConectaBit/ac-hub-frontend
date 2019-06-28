@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import MenuButton from "./menuButton";
 import styled from "styled-components";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Menu = styled.div`
   display: flex;
@@ -100,8 +104,48 @@ const Input = styled.input`
   }
 `;
 
+const CREATE_USER_MUTATION = gql`
+  mutation createUser(
+    $name: String!
+    $email: String!
+    $password: String!
+    $class: String!
+  ) {
+    createUser(
+      input: { name: $name, email: $email, password: $password, class: $class }
+    ) {
+      name
+      email
+    }
+  }
+`;
+
 function SideBar(props) {
   const [show, setShow] = useState(false);
+  const [userName, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [inst, setInst] = useState(null);
+
+  const [createUser, { data, loading, error }] = useMutation(
+    CREATE_USER_MUTATION,
+    { variables: {name: userName, email: email, password: password, class: inst} }
+  );
+
+  toast.configure()
+
+  function register(){
+    createUser()
+    if(data){
+      toast.success(`Usuário criado com sucesso!`)
+      setShow(!show)
+      toast.warn("Entre com seu email e senha para continuar")
+    }
+
+    if(error){
+      toast.error(`Este email já está cadastrado`)
+    }
+  }
 
   function toggleMenu() {
     setShow(!show);
@@ -119,13 +163,29 @@ function SideBar(props) {
       <Menu show={show} handleMouseDown={handleMouseDown}>
         <Box />
         <Form>
-          <Input type="text" placeholder="Nome de usuário" />
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Senha" />
-          <Input type="text" placeholder="Instituição" />
+          <Input
+            type="text"
+            placeholder="Nome de usuário"
+            onChange={e => setUsername(e.target.value)}
+          />
+          <Input
+            type="email"
+            placeholder="Email"
+            onChange={e => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Senha"
+            onChange={e => setPassword(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="Instituição"
+            onChange={e => setInst(e.target.value)}
+          />
           <Flex>
             <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
-            <RegisterButton>Avançar</RegisterButton>
+            <RegisterButton onClick={() => register()}>Avançar</RegisterButton>
           </Flex>
         </Form>
       </Menu>

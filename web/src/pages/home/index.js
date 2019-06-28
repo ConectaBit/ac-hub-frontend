@@ -7,7 +7,6 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Redirect } from "react-router-dom";
 
 const Layout = styled.div`
   display: flex;
