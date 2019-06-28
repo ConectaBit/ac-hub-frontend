@@ -147,6 +147,10 @@ function Home() {
   const [createToken, {data, loading, error}] = useMutation(CREATE_TOKEN_MUTATION, {variables: {email: email, password: pass}})
   console.log(data)
   console.log(error)
+
+  function validateForm(){
+    return (!email || !pass) ? console.log('camposObrigatórios') : createToken()
+  }
   return (
     <Layout>
       <Menu>
@@ -244,7 +248,7 @@ function Home() {
             onChange={e => setPass(e.target.value)}
           />
           <Flex>
-            <ButtonLogin onClick={() => createToken() } >Entrar</ButtonLogin>
+            <ButtonLogin onClick={() => validateForm() } >Entrar</ButtonLogin>
           </Flex>
         </LoginForm>
         <Footer>
