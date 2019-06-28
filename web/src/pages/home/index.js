@@ -4,9 +4,9 @@ import "./logo.svg";
 import { Github } from "styled-icons/boxicons-logos/Github";
 import SideBar from "../../components/sideBar";
 import gql from "graphql-tag";
-import {useMutation} from '@apollo/react-hooks'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useMutation } from "@apollo/react-hooks";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Redirect } from "react-router-dom";
 
 const Layout = styled.div`
@@ -137,7 +137,7 @@ const Flex = styled.div`
 
 const CREATE_TOKEN_MUTATION = gql`
   mutation createToken($email: String!, $password: String!) {
-    createToken(email: $email, password: $password){
+    createToken(email: $email, password: $password) {
       token
     }
   }
@@ -147,23 +147,33 @@ function Home() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const [createToken, {data, loading, error}] = useMutation(CREATE_TOKEN_MUTATION, {variables: {email: email, password: pass}})
+  const [createToken, { data, loading, error }] = useMutation(
+    CREATE_TOKEN_MUTATION,
+    { variables: { email: email, password: pass } }
+  );
 
-  toast.configure()
+  toast.configure();
   const notify = () => toast.warn("Prencha os campos corretamente");
 
-  function validateForm(){
-    if(error){
-      toast.error("Email ou senha incorretos")
-    }
+  function validateForm() {
+    function auth() {
 
-    if(data){
-      const token = data.createToken.token;
-      localStorage.setItem("access-token", token)
-      toast.success("Bem vindo, carái")
-      return <Redirect to="/feed" />
+      createToken();
+
+      const login = () => {
+
+        if(data){
+          const token = data.createToken.token;
+          localStorage.setItem("access-token", token);
+          return <Redirect to="feed" />
+        };
+      }
+      
+      return (error) ? toast.error("Email ou senha incorretos") : login()
+      
+
     }
-    return (!email || !pass) ? notify() : createToken()
+    return !email || !pass ? notify() : auth();
   }
   return (
     <Layout>
@@ -262,7 +272,7 @@ function Home() {
             onChange={e => setPass(e.target.value)}
           />
           <Flex>
-            <ButtonLogin onClick={() => validateForm()} >Entrar</ButtonLogin>
+            <ButtonLogin onClick={() => validateForm()}>Entrar</ButtonLogin>
           </Flex>
         </LoginForm>
         <Footer>

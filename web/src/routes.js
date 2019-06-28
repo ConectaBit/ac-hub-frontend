@@ -11,12 +11,12 @@ function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/feed"
-         render={() => (isAuth() ? <Redirect to='feed' /> : <Home />)} />
+         render={() => (isAuth() ? <Feed /> : <Home />)} />
         <Route path="/article" component={Article} />
         <Route path="/logout" component={Logout} />
         <Route
           path="/"
-          render={() => (isAuth() ? <Redirect to="feed" /> : <Home />)}
+          render={() => (isAuth() ? <Feed /> : <Home />)}
         />
       </Switch>
     </BrowserRouter>
