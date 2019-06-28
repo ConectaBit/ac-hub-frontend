@@ -16,6 +16,7 @@ const Box = styled.div`
   flex-direction: column;
   top: 17.5rem;
   position: fixed;
+  margin: auto;
 
   span {
     font-family: "Varela Round", sans-serif;
@@ -41,7 +42,7 @@ const IconBook = styled(BookContent)`
   }
 `;
 
-/*const reposList = [
+const reposList = [
   { title: "repo1", link: "/repo1", id: 1 },
   { title: "repo2", link: "/repo2", id: 2 },
   { title: "repo3", link: "/repo3", id: 3 },
@@ -53,14 +54,9 @@ const IconBook = styled(BookContent)`
   { title: "repo9", link: "/repo6", id: 9 },
   { title: "repo10", link: "/repo6", id: 10 }
 ];
-*/
 
 function RepoList() {
-  const [repos, setRepos] = useState(null);
-
-  //function handleReposReceived(repolist) {
-  //  setRepos(repolist);
-  //}
+  const [repos, setRepos] = useState(reposList);
 
   return (
     <Box>

@@ -147,7 +147,7 @@ function Home() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const [createToken, { data, loading, error }] = useMutation(
+  const [createToken, { data, error }] = useMutation(
     CREATE_TOKEN_MUTATION,
     { variables: { email: email, password: pass } }
   );
@@ -155,26 +155,25 @@ function Home() {
   toast.configure();
   const notify = () => toast.warn("Prencha os campos corretamente");
 
-  function validateForm() {
-    function auth() {
+  function login(){
 
-      createToken();
-
-      const login = () => {
-
-        if(data){
-          const token = data.createToken.token;
-          localStorage.setItem("access-token", token);
-          return <Redirect to="feed" />
-        };
-      }
-      
-      return (error) ? toast.error("Email ou senha incorretos") : login()
-      
-
+    if(!email || !pass){
+      return notify()
     }
-    return !email || !pass ? notify() : auth();
+
+    createToken()
+    if(data) {
+      const token = data.createToken.token;
+      console.log(data);
+      localStorage.setItem("access-token", token);
+      return window.location.reload();
+    }
+
+    if(error){
+      return toast.error("Email ou senha inválidos")
+    }
   }
+
   return (
     <Layout>
       <Menu>
@@ -272,7 +271,7 @@ function Home() {
             onChange={e => setPass(e.target.value)}
           />
           <Flex>
-            <ButtonLogin onClick={() => validateForm()}>Entrar</ButtonLogin>
+            <ButtonLogin onClick={() => login()}>Entrar</ButtonLogin>
           </Flex>
         </LoginForm>
         <Footer>

@@ -32,9 +32,9 @@ const UserDatas = styled.div`
 function UserInfo(props) {
   return (
     <Wrapper>
-      <UserPhoto />
+      <UserPhoto src='https://upload.wikimedia.org/wikipedia/pt/thumb/5/5c/DVader.jpeg/225px-DVader.jpeg'/>
       <UserDatas>
-          <span>{props.username ||'Carregando...'}</span>
+          <span>{props.username ||'vader'}</span>
       </UserDatas>
     </Wrapper>
   );

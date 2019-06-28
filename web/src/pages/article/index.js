@@ -12,7 +12,8 @@ function Article() {
     <>
       <Header />
       <Layout>
-        <Timeline />
+        <Timeline>
+        </Timeline>
       </Layout>
     </>
   );
