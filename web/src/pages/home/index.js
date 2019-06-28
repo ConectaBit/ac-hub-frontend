@@ -11,10 +11,9 @@ const Layout = styled.div`
   height: 100vh;
   margin: auto;
   justify-content: center;
-  background-image: url("https://www.bricks4kidz.com.au/act-northside/wp-content/uploads/sites/16/2018/02/Madame-curie-Copertina-blogr.jpg");
-  background-size: cover;
+  background-image: url("http://uploaddeimagens.com.br/images/002/161/572/full/marie.png?1561691068");
+  background-size: contain;
   background-repeat: no-repeat;
-  background-blend-mode: luminosity;
 `;
 
 const Footer = styled.footer`
