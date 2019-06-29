@@ -23,6 +23,8 @@ const LeftBox = styled.div`
 const CenterBox = styled.div`
   width: 100%;
   margin-left: 15rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const AddIcon = styled(Add)`
@@ -40,12 +42,9 @@ const WriteButton = styled.button`
   border-radius: 50%;
   border: 0;
   background-color: #fff;
-
   position: fixed;
-
   bottom: 2rem;
   right: 2rem;
-
   transition: all .3s;
 
   :hover{
@@ -65,11 +64,6 @@ function Feed() {
           <RepoList />
         </LeftBox>
         <CenterBox>
-          <PostInfo />
-          <PostInfo />
-          <PostInfo />
-          <PostInfo />
-          <PostInfo />
           <PostInfo />
         </CenterBox>
 

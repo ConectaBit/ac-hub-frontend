@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { ExternalLink } from "styled-icons/feather/ExternalLink";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,47 +34,71 @@ const PostDatas = styled.div`
 `;
 
 const Title = styled.span`
-    font-size: 2rem;
+  font-size: 2rem;
 `;
 
 const Description = styled.div`
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 1rem;
-    margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-top: 1rem;
 
-    p{
-        font-size: .8rem;
-    }
+  p {
+    font-size: 0.8rem;
+  }
 `;
 
 const Details = styled.div`
-    display: flex;
-    margin-top: 2rem;
-    flex-direction: column;
-    span{
-        font-size: .8rem;
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: column;
+  span {
+    font-size: 0.8rem;
+  }
+`;
+
+const FETCH_POST_DATAS = gql`
+  query {
+    posts(first: 20) {
+      id
+      title
+      content
+      description
+      createdAt
+      author {
+        id
+        name
+      }
     }
+  }
 `;
 
 function PostInfo() {
+  const { loading, data } = useQuery(FETCH_POST_DATAS);
+  console.log(data);
   return (
-    <Wrapper>
-      <PostDatas>
-        <Title>Título</Title>
-        <p>Lorem ipsum lorem ipsum lorem lorem ipsum loremlorem ipsum lorem</p>
-        <Description><p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p></Description>
-      </PostDatas>
-
-      <Details>
-          <span>Autor: @yoda</span>
-          <span>Data de criação: 14/13¹/12</span>
-      </Details>
-
-      <Actions>
-        <LinkIcon />
-      </Actions>
-    </Wrapper>
+    <div>
+      {loading ? (
+        <div>Loading</div>
+      ) : (
+        <div>
+          {data.posts.map(post => (
+            <Wrapper key={post.id}>
+              <Title>{post.title}</Title>
+              <PostDatas>
+                <p>{post.description}</p>
+              </PostDatas>
+              <Description><p>{post.content}</p></Description>
+              <Details>
+                <span>Autor: {post.author.name}</span>
+                <span>{post.createdAt}</span>
+              </Details>
+              <Actions><LinkIcon /></Actions>
+            </Wrapper>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
