@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import { RingSpinner } from "react-spinners-kit";
 
 const Wrapper = styled.div`
-  border: 1px solid #ccc;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -10,6 +12,10 @@ const Wrapper = styled.div`
   border-radius: 5px;
   position: fixed;
   top: 3rem;
+  align-items: center;
+  width: 12rem;
+  height: 13.5rem;
+  background-color: #fff;
 `;
 
 const UserPhoto = styled.img`
@@ -18,24 +24,40 @@ const UserPhoto = styled.img`
 `;
 
 const UserDatas = styled.div`
-    padding-top: .3rem;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+  padding-top: 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 
-    span{
-        text-align: center;
-        font-size: 1rem;
+  span {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+`;
+
+const FETCH_USER_INFO = gql`
+  query {
+    currentUser {
+      name
+      photo
     }
-`
+  }
+`;
 
-function UserInfo(props) {
+function UserInfo() {
+  const { data, loading } = useQuery(FETCH_USER_INFO);
   return (
     <Wrapper>
-      <UserPhoto src='https://upload.wikimedia.org/wikipedia/pt/thumb/5/5c/DVader.jpeg/225px-DVader.jpeg'/>
-      <UserDatas>
-          <span>{props.username ||'vader'}</span>
-      </UserDatas>
+      {loading ? (
+        <RingSpinner color="#2e9fff" size={6} sizeUnit={"rem"} />
+      ) : (
+        <>
+        <UserPhoto src={data.currentUser.photo}/>
+        <UserDatas>
+          <span>{data.currentUser.name}</span>
+        </UserDatas>
+        </>
+      )}
     </Wrapper>
   );
 }
