@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ExternalLink } from "styled-icons/feather/ExternalLink";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import {Link} from 'react-router-dom'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -93,7 +94,11 @@ function PostInfo() {
                 <span>Autor: {post.author.name}</span>
                 <span>{post.createdAt}</span>
               </Details>
-              <Actions><LinkIcon /></Actions>
+              <Actions>
+                <Link to={`/article/id:${post.id}`}>
+                <LinkIcon />
+                </Link>
+              </Actions>
             </Wrapper>
           ))}
         </div>

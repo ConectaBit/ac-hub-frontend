@@ -7,7 +7,7 @@ const Layout = styled.div`
   width: 100vw;
 `;
 
-function Article() {
+function Article(props) {
   return (
     <>
       <Header />
