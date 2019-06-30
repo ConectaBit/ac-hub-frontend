@@ -4,9 +4,37 @@ import Header from "../../components/header";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { Add } from "styled-icons/material/Add";
 
 const Layout = styled.div`
   width: 100vw;
+`;
+
+const AddIcon = styled(Add)`
+  width: 2rem;
+  height: 2rem;
+  color: #2e9fff;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const AddButton = styled.button`
+  background-color: #FFF;
+  padding: 1rem;
+  border: 0;
+  outline: 0;
+  border-radius: 50%;
+  transition: all .5s;
+
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+
+  :hover {
+    cursor: pointer;
+    padding: 1.2rem;
+  }
 `;
 
 const FETCH_POST_DATA = gql`
@@ -70,6 +98,7 @@ function Article(props) {
           </Timeline>
         )}
       </Layout>
+      <AddButton><AddIcon /></AddButton>
     </>
   );
 }
