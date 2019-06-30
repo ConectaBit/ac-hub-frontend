@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../../components/header";
+import AddElement from "../../components/addElement";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -20,12 +21,12 @@ const AddIcon = styled(Add)`
 `;
 
 const AddButton = styled.button`
-  background-color: #FFF;
+  background-color: #fff;
   padding: 1rem;
   border: 0;
   outline: 0;
   border-radius: 50%;
-  transition: all .5s;
+  transition: all 0.5s;
 
   position: fixed;
   bottom: 2rem;
@@ -98,7 +99,11 @@ function Article(props) {
           </Timeline>
         )}
       </Layout>
-      <AddButton><AddIcon /></AddButton>
+      <AddElement>
+        <AddButton>
+          <AddIcon />
+        </AddButton>
+      </AddElement>
     </>
   );
 }
