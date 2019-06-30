@@ -11,7 +11,7 @@ function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/feed" render={() => (isAuth() ? <Feed /> : <Home />)} />
-        <Route path="/article" component={Article} />
+        <Route path="/article/:id" render={(props) => isAuth() ? <Article articleID={props.match.params.id} /> : <Home />} />
         <Route path="/logout" component={Logout} />
         <Route path="/" render={() => (isAuth() ? <Feed /> : <Home />)} />
       </Switch>
