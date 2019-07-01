@@ -12,9 +12,6 @@ const COMMENT_MUTATION = gql`
 `;
 
 const Wrapper = styled.div`
-  position: fixed;
-  top: 25rem;
-  right: 1rem;
   display: flex;
   flex-direction: column;
 `;
@@ -24,8 +21,7 @@ const Input = styled.input`
   border: 1px solid #ccc;
   outline: 0;
   border-radius: 5px;
-  width: 29rem;
-  height: 4rem;
+  flex: 1;
 `;
 
 const Button = styled.button`

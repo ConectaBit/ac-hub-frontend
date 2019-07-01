@@ -7,17 +7,14 @@ const Wrapper = styled.div`
   padding: 1rem;
   background-color: #fff;
   border-radius: 5px;
-  position: fixed;
-  top: 4rem;
-  right: 1rem;
-  width: 29rem;
+  flex:1;
 `;
 
 const Flex = styled.div`
   display: flex;
   flex-direction: column;
-  margin: .5rem;
-  padding: .5rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
   border-bottom: 1px solid #ccc;
 `;
 
@@ -44,7 +41,18 @@ function CommentList(props) {
   return (
     <Wrapper>
       <h1>Comentários</h1>
-      {loading ? (<span>Carregando comentários</span>) : (<div>{data.commentsByPost.map((comment) => (<Flex><span key={comment.id}>{comment.comment}</span></Flex>))}</div>)}
+      {loading ? (
+        <span>Carregando comentários</span>
+      ) : (
+        <div>
+          {data.commentsByPost.map(comment => (
+            <Flex key={comment.id}>
+              <span>{comment.user.name}</span>
+              <span>{comment.comment}</span>
+            </Flex>
+          ))}
+        </div>
+      )}
     </Wrapper>
   );
 }

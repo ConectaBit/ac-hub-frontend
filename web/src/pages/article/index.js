@@ -26,6 +26,14 @@ const AddIcon = styled(Add)`
   }
 `;
 
+const CommentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 75%;
+  margin-bottom: 5rem;
+`;
+
 const AddButton = styled.button`
   background-color: #fff;
   padding: 1rem;
@@ -134,8 +142,10 @@ function Article(props) {
                 <AddIcon />
               </AddButton>
             </AddElement>
+            <CommentWrapper>
             <CommentList postID={data.post.id} />
             <AddComment postID={data.post.id} />
+            </CommentWrapper>
           </>
         )}
         <UserInfo />
