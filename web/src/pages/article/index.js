@@ -89,7 +89,7 @@ function Article(props) {
       <Layout>
         {loading ? (
           <>Loading...</>
-        ) : (
+        ) : (<>
           <Timeline key={data.post.id}>
             <TimelineItem dateText={data.post.createdAt}>
               <h1>{data.post.title}</h1>
@@ -97,13 +97,14 @@ function Article(props) {
               <p>{data.post.description}</p>
             </TimelineItem>
           </Timeline>
+          <AddElement postID={data.post.id}>
+          <AddButton>
+            <AddIcon />
+          </AddButton>
+        </AddElement>
+        </>
         )}
       </Layout>
-      <AddElement>
-        <AddButton>
-          <AddIcon />
-        </AddButton>
-      </AddElement>
     </>
   );
 }

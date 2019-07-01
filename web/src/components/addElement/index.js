@@ -16,8 +16,8 @@ const Menu = styled.div`
   transform: ${props =>
     props.show === true
       ? "translate3d(0vw, 0, 0)"
-      : "translate3d(100vw, 0, 0)"};
-  width: 100vw;
+      : "translate3d(35vw, 0, 0)"};
+  width: 35vw;
   height: 100%;
   transition: transform 0.5s cubic-bezier(0, 0.52, 0, 1);
   background-color: #1a4040;
@@ -66,17 +66,6 @@ const RegisterButton = styled.button`
   }
 `;
 
-const Box = styled.div`
-  height: 100%;
-  flex: 2;
-  background-color: #fff;
-  align-self: flex-end;
-  background-image: url("https://mymodernmet.com/wp/wp-content/uploads/2018/08/leonardo-da-vinci-vitruvian-man-1.jpg");
-  background-size: cover;
-  background-blend-mode: luminosity;
-  background-position: center;
-`;
-
 const Flex = styled.div`
   display: flex;
   flex-direction: ${props => props.direction};
@@ -90,7 +79,7 @@ const Form = styled.div`
   background-color: #fff;
 `;
 
-const Input = styled.input`
+const Textarea = styled.textarea`
   width: 80%;
   font-size: 1.5rem;
   padding: 1rem;
@@ -124,21 +113,20 @@ const Select = styled.select`
   }
 `;
 
-const CREATE_ARTICLE_MUTATION = gql`
-  mutation createPost(
-    $title: String!
+const CREATE_ELEMENT_MUTATION = gql`
+  mutation createElement(
+    $name: String!
     $description: String!
-    $content: String!
+    $post: Int!
   ) {
-    createPost(
+    createElement(
       input: {
-        title: $title
-        content: $description
-        description: $content
+        name: $name
+        description: $description
+        post: $post
       }
     ) {
-      title
-      content
+      name
       description
     }
   }
@@ -146,17 +134,16 @@ const CREATE_ARTICLE_MUTATION = gql`
 
 function AddElement(props) {
   const [show, setShow] = useState(false);
-  const [title, setTitle] = useState(null);
+  const [name, setName] = useState(null);
   const [description, setDescription] = useState(null);
-  const [content, setContent] = useState("Matemática");
 
-  const [createArticle, { data, error }] = useMutation(
-    CREATE_ARTICLE_MUTATION,
+  const [createElement, { data, error }] = useMutation(
+    CREATE_ELEMENT_MUTATION,
     {
       variables: {
-        title: title,
+        name: name,
         description: description,
-        content: content
+        post: props.postID
       }
     }
   );
@@ -164,7 +151,7 @@ function AddElement(props) {
   toast.configure();
 
   function add(){
-    createArticle();
+    createElement();
     if(data) {
       toast.success("Trabalho criado com sucesso!")
       setShow(!show);
@@ -182,7 +169,6 @@ function AddElement(props) {
 
   function handleMouseDown(e) {
     toggleMenu();
-    console.log("clicked");
     e.stopPropagation();
   }
 
@@ -190,22 +176,20 @@ function AddElement(props) {
     <>
       <AddButton handleMouseDown={handleMouseDown} label={props.children} />
       <Menu show={show} handleMouseDown={handleMouseDown}>
-        <Box />
         <Form>
-          <Input type="text" placeholder="Adicione um título ao seu trabalho" onChange={e => setTitle(e.target.value)} />
-          <Input type="textarea" placeholder="Agora uma pequena descrição" onChange={e => setDescription(e.target.value)} />
           <Select
-            onChange={e => setContent(e.target.value)}
-            defaultValue={content}
+            onChange={e => setName(e.target.value)}
+            defaultValue={description}
           >
-            <option value="Matemática">Matemática</option>
-            <option value="Biologia">Biologia</option>
-            <option value="Química">Química</option>
-            <option value="Física">Física</option>
+            <option value="Introdução">Introdução</option>
+            <option value="Metodologia">Metodologia</option>
+            <option value="Química">Justificativa</option>
+            <option value="Física">Publicação</option>
           </Select>
-          <Flex>
+          <Textarea type="text" placeholder="Conteúdo" onChange={e => setDescription(e.target.value)} rows={10} />
+          <Flex direction='column'>
             <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
-            <RegisterButton onClick={() => add()}>Avançar</RegisterButton>
+            <RegisterButton onClick={() => add()}>Adicionar</RegisterButton>
           </Flex>
         </Form>
       </Menu>
