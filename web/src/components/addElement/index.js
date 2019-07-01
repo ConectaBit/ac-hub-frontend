@@ -23,6 +23,7 @@ const Menu = styled.div`
   background-color: #1a4040;
   background-position: center;
   background-blend-mode: overlay;
+  z-index: 1;
 
   :hover {
     cursor: auto;
