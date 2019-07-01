@@ -154,9 +154,8 @@ function AddElement(props) {
   function add(){
     createElement();
     if(data) {
-      toast.success("Trabalho criado com sucesso!")
+      toast.success("Elemento Adicionado com sucesso!")
       setShow(!show);
-      toast.warn("Agora você pode adicionar elementos ao seu trabalho")
     }
 
     if(error) {

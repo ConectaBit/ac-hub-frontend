@@ -5,6 +5,7 @@ import AddElement from "../../components/addElement";
 import UserInfo from "../../components/userInfo";
 import RepoList from "../../components/repoList";
 import CommentList from "../../components/commentList";
+import AddComment from "../../components/addComment";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -133,7 +134,8 @@ function Article(props) {
                 <AddIcon />
               </AddButton>
             </AddElement>
-            <CommentList postID={data.post.id}/>
+            <CommentList postID={data.post.id} />
+            <AddComment postID={data.post.id} />
           </>
         )}
         <UserInfo />
