@@ -183,7 +183,7 @@ function AddElement(props) {
           >
             <option value="Introdução">Introdução</option>
             <option value="Metodologia">Metodologia</option>
-            <option value="Química">Justificativa</option>
+            <option value="Justificativa">Justificativa</option>
             <option value="Física">Publicação</option>
           </Select>
           <Textarea type="text" placeholder="Conteúdo" onChange={e => setDescription(e.target.value)} rows={10} />

@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../../components/header";
 import AddElement from "../../components/addElement";
+import UserInfo from '../../components/userInfo';
+import RepoList from '../../components/repoList'
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Add } from "styled-icons/material/Add";
 
 const Layout = styled.div`
-  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  padding-left: 3rem;
 `;
 
 const AddIcon = styled(Add)`
@@ -36,6 +40,18 @@ const AddButton = styled.button`
     cursor: pointer;
     padding: 1.2rem;
   }
+`;
+
+const Box = styled.div`
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  margin-bottom: 2rem;
 `;
 
 const FETCH_POST_DATA = gql`
@@ -89,21 +105,37 @@ function Article(props) {
       <Layout>
         {loading ? (
           <>Loading...</>
-        ) : (<>
-          <Timeline key={data.post.id}>
-            <TimelineItem dateText={data.post.createdAt}>
-              <h1>{data.post.title}</h1>
-              <h2>{data.post.content}</h2>
-              <p>{data.post.description}</p>
-            </TimelineItem>
-          </Timeline>
-          <AddElement postID={data.post.id}>
-          <AddButton>
-            <AddIcon />
-          </AddButton>
-        </AddElement>
-        </>
+        ) : (
+          <>
+            <Timeline key={data.post.id}>
+              <TimelineItem dateText={data.post.createdAt}>
+                <h1>{data.post.title}</h1>
+                <h2>{data.post.content}</h2>
+                <p>{data.post.description}</p>
+              </TimelineItem>
+
+              {data.post.elements.map(element => (
+                <TimelineItem
+                  dateText={element.createdAt}
+                  dateInnerStyle={{ background: "#76bb7f" }}
+                  key={element.id}
+                >
+                  <Box>
+                    <Title>{element.name}</Title>
+                    <h2>{element.description}</h2>
+                  </Box>
+                </TimelineItem>
+              ))}
+            </Timeline>
+            <AddElement postID={data.post.id}>
+              <AddButton>
+                <AddIcon />
+              </AddButton>
+            </AddElement>
+          </>
         )}
+          <UserInfo />
+          <RepoList />
       </Layout>
     </>
   );

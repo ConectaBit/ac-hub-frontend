@@ -56,6 +56,7 @@ const Wrapper = styled.header`
   background-color: #fff;
   position: sticky;
   top: 0;
+  z-index: 999;
 `;
 
 const IconsWrapper = styled.div`
