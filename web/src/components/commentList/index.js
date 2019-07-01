@@ -11,7 +11,14 @@ const Wrapper = styled.div`
   top: 4rem;
   right: 1rem;
   width: 29rem;
+`;
 
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: .5rem;
+  padding: .5rem;
+  border-bottom: 1px solid #ccc;
 `;
 
 const FETCH_COMMENTS = gql`
@@ -37,7 +44,7 @@ function CommentList(props) {
   return (
     <Wrapper>
       <h1>Comentários</h1>
-      Comment List component
+      {loading ? (<span>Carregando comentários</span>) : (<div>{data.commentsByPost.map((comment) => (<Flex><span key={comment.id}>{comment.comment}</span></Flex>))}</div>)}
     </Wrapper>
   );
 }

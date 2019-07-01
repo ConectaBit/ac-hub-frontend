@@ -13,7 +13,7 @@ const COMMENT_MUTATION = gql`
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 10rem;
+  top: 25rem;
   right: 1rem;
   display: flex;
   flex-direction: column;
