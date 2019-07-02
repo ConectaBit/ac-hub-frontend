@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import {useQuery} from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import { DominoSpinner } from "react-spinners-kit";
+import { Link } from "react-router-dom";
 
 const Box = styled.div`
   @import url("https://fonts.googleapis.com/css?family=Varela+Round&display=swap");
@@ -11,7 +12,7 @@ const Box = styled.div`
   box-sizing: border-box;
   text-align: center;
   display: flex;
-  background-color: #FFF;
+  background-color: #fff;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -27,6 +28,7 @@ const Box = styled.div`
     margin: 0.5rem auto;
     font-size: 1rem;
     color: #7c9999;
+    text-decoration: none;
 
     :hover {
       color: #ff82de;
@@ -36,28 +38,34 @@ const Box = styled.div`
 `;
 
 const FETCH_REPOS = gql`
-  query{
-  currentUser{
-    posts{
-    	title
-      id
+  query {
+    currentUser {
+      posts {
+        title
+        id
+      }
     }
   }
-}
 `;
 
 function RepoList() {
-  const {data, loading} = useQuery(FETCH_REPOS); 
+  const { data, loading } = useQuery(FETCH_REPOS);
 
-  console.log(data)
-  return(
+  console.log(data);
+  return (
     <Box>
-    {loading ? (
-      <DominoSpinner color="#59D9D9" size={10} sizeUnit="rem" />
-      ) : (<ul>
-        {data.currentUser.posts.map((post) => (<li key={post.id}>{post.title}</li>))}
-      </ul>)
-    }</Box>
+      {loading ? (
+        <DominoSpinner color="#59D9D9" size={10} sizeUnit="rem" />
+      ) : (
+        <ul>
+          {data.currentUser.posts.map(post => (
+            <Link to={`/article/id:${post.id}`} key={post.id}>
+              <li>{post.title}</li>
+            </Link>
+          ))}
+        </ul>
+      )}
+    </Box>
   );
 }
 
