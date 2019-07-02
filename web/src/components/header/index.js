@@ -4,7 +4,7 @@ import { HomeAlt } from "styled-icons/boxicons-regular/HomeAlt";
 import { Wpexplorer } from "styled-icons/fa-brands/Wpexplorer";
 import { Group } from "styled-icons/material/Group";
 import { LogOut } from "styled-icons/feather/LogOut";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const HomeIcon = styled(HomeAlt)`
   width: 2rem;
@@ -70,12 +70,14 @@ function Header() {
   return (
     <Wrapper>
       <IconsWrapper>
+        <NavLink exact to='/'>
         <HomeIcon />
+        </NavLink>
         <ExploreIcon />
         <GroupIcon />
-        <Link to='logout'>
+        <NavLink to='logout'>
         <LogoutIcon />
-        </Link>
+        </NavLink>
       </IconsWrapper>
     </Wrapper>
   );
