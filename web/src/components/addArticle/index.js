@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const Menu = styled.div`
@@ -124,6 +125,11 @@ const Select = styled.select`
   }
 `;
 
+const ErrorMessage = styled.span`
+  color: tomato;
+  text-align: center;
+`;
+
 const CREATE_ARTICLE_MUTATION = gql`
   mutation createPost(
     $title: String!
@@ -131,15 +137,12 @@ const CREATE_ARTICLE_MUTATION = gql`
     $content: String!
   ) {
     createPost(
-      input: {
-        title: $title
-        content: $description
-        description: $content
-      }
+      input: { title: $title, content: $description, description: $content }
     ) {
       title
       content
       description
+      id
     }
   }
 `;
@@ -163,27 +166,19 @@ function AddArticle(props) {
 
   toast.configure();
 
-  function add(){
-    createArticle();
-    if(data) {
-      toast.success("Trabalho criado com sucesso!")
-      setShow(!show);
-      toast.warn("Agora você pode adicionar elementos ao seu trabalho")
-    }
-
-    if(error) {
-      toast.error('Algo errado não está certo ')
-    }
-  }
-
   function toggleMenu() {
     setShow(!show);
   }
 
   function handleMouseDown(e) {
     toggleMenu();
-    console.log("clicked");
     e.stopPropagation();
+  }
+
+  function success() {
+    toast.success('Trabalho criado com sucesso');
+    toast.info('Agora você pode adicionar elementos ao seu trabalho')
+    return <Redirect to={`/article/id:${data.createPost.id}`} />;
   }
 
   return (
@@ -192,8 +187,16 @@ function AddArticle(props) {
       <Menu show={show} handleMouseDown={handleMouseDown}>
         <Box />
         <Form>
-          <Input type="text" placeholder="Adicione um título ao seu trabalho" onChange={e => setTitle(e.target.value)} />
-          <Input type="textarea" placeholder="Agora uma pequena descrição" onChange={e => setDescription(e.target.value)} />
+          <Input
+            type="text"
+            placeholder="Adicione um título ao seu trabalho"
+            onChange={e => setTitle(e.target.value)}
+          />
+          <Input
+            type="textarea"
+            placeholder="Agora uma pequena descrição"
+            onChange={e => setDescription(e.target.value)}
+          />
           <Select
             onChange={e => setContent(e.target.value)}
             defaultValue={content}
@@ -202,12 +205,17 @@ function AddArticle(props) {
             <option value="Biologia">Biologia</option>
             <option value="Química">Química</option>
             <option value="Física">Física</option>
+            <option value="Computação">Computação</option>
           </Select>
+          {error ? <ErrorMessage>Algo errado não está certo</ErrorMessage> : null}
           <Flex>
             <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
-            <RegisterButton onClick={() => add()}>Avançar</RegisterButton>
+            <RegisterButton onClick={() => createArticle()}>
+              Avançar
+            </RegisterButton>
           </Flex>
         </Form>
+        {data ? success() : null}
       </Menu>
     </>
   );
