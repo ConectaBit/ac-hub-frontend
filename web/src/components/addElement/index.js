@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const Menu = styled.div`
@@ -14,9 +15,7 @@ const Menu = styled.div`
   right: 0;
   top: 0;
   transform: ${props =>
-    props.show === true
-      ? "translate3d(0vw, 0, 0)"
-      : "translate3d(35vw, 0, 0)"};
+    props.show === true ? "translate3d(0vw, 0, 0)" : "translate3d(35vw, 0, 0)"};
   width: 35vw;
   height: 100%;
   transition: transform 0.5s cubic-bezier(0, 0.52, 0, 1);
@@ -114,18 +113,15 @@ const Select = styled.select`
   }
 `;
 
+const ErrorMessage = styled.span`
+  color: tomato;
+  text-align: center;
+`;
+
 const CREATE_ELEMENT_MUTATION = gql`
-  mutation createElement(
-    $name: String!
-    $description: String!
-    $post: Int!
-  ) {
+  mutation createElement($name: String!, $description: String!, $post: Int!) {
     createElement(
-      input: {
-        name: $name
-        description: $description
-        post: $post
-      }
+      input: { name: $name, description: $description, post: $post }
     ) {
       name
       description
@@ -145,22 +141,17 @@ function AddElement(props) {
         name: name,
         description: description,
         post: props.postID
-      }
+      },
+      refetchQueries: ["FETCH_POST_DATA"]
     }
   );
 
   toast.configure();
 
-  function add(){
-    createElement();
-    if(data) {
-      toast.success("Elemento Adicionado com sucesso!")
-      setShow(!show);
-    }
-
-    if(error) {
-      toast.error('Algo errado não está certo ')
-    }
+  function add() {
+    window.location.reload();
+    toast.success('Elemento adicionado')
+    return
   }
 
   function toggleMenu() {
@@ -184,13 +175,22 @@ function AddElement(props) {
             <option value="Introdução">Introdução</option>
             <option value="Metodologia">Metodologia</option>
             <option value="Justificativa">Justificativa</option>
-            <option value="Física">Publicação</option>
+            <option value="Publicação">Publicação</option>
           </Select>
-          <Textarea type="text" placeholder="Conteúdo" onChange={e => setDescription(e.target.value)} rows={10} />
-          <Flex direction='column'>
+          <Textarea
+            type="text"
+            placeholder="Conteúdo"
+            onChange={e => setDescription(e.target.value)}
+            rows={10}
+          />
+          <Flex direction="column">
             <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
-            <RegisterButton onClick={() => add()}>Adicionar</RegisterButton>
+            <RegisterButton onClick={() => createElement()}>
+              Adicionar
+            </RegisterButton>
+            {error ? <ErrorMessage>Algo errado não está certo</ErrorMessage> : null}
           </Flex>
+          {data ? add() : null}
         </Form>
       </Menu>
     </>
