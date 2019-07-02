@@ -5,8 +5,7 @@ import { Github } from "styled-icons/boxicons-logos/Github";
 import SideBar from "../../components/sideBar";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Redirect } from "react-router-dom";
 
 const Layout = styled.div`
   display: flex;
@@ -120,6 +119,7 @@ const ButtonLogin = styled.button`
   font-size: 1rem;
   flex: 1;
   transition: all 0.5s;
+  max-width: 10rem;
 
   :hover {
     opacity: 0.8;
@@ -134,6 +134,10 @@ const Flex = styled.div`
   align-items: stretch;
 `;
 
+const ErrorMessage = styled.span`
+  color: tomato;
+`;
+
 const CREATE_TOKEN_MUTATION = gql`
   mutation createToken($email: String!, $password: String!) {
     createToken(email: $email, password: $password) {
@@ -146,31 +150,14 @@ function Home() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const [createToken, { data, error }] = useMutation(
-    CREATE_TOKEN_MUTATION,
-    { variables: { email: email, password: pass } }
-  );
+  const [createToken, { data, error }] = useMutation(CREATE_TOKEN_MUTATION, {
+    variables: { email: email, password: pass }
+  });
 
-  toast.configure();
-  const notify = () => toast.warn("Prencha os campos corretamente");
-
-  function login(){
-
-    if(!email || !pass){
-      return notify()
-    }
-
-    createToken()
-    if(data) {
-      const token = data.createToken.token;
-      console.log(data);
-      localStorage.setItem("access-token", token);
-      return window.location.reload();
-    }
-
-    if(error){
-      return toast.error("Email ou senha inválidos")
-    }
+  function login() {
+    const token = data.createToken.token;
+    localStorage.setItem("access-token", token);
+    return <Redirect to="feed" />;
   }
 
   return (
@@ -257,6 +244,7 @@ function Home() {
               </g>
             </svg>
           </Logo>
+
           <Input
             type="email"
             placeholder="Email"
@@ -270,14 +258,18 @@ function Home() {
             onChange={e => setPass(e.target.value)}
           />
           <Flex>
-            <ButtonLogin onClick={() => login()}>Entrar</ButtonLogin>
+            <ButtonLogin onClick={() => createToken()}>Entrar</ButtonLogin>
           </Flex>
+          {error ? (
+            <ErrorMessage>Email ou senha incorretos</ErrorMessage>
+          ) : null}
         </LoginForm>
         <Footer>
           <span>&copy; 2019 WTCS - Elixir</span>
           <IconGit />
         </Footer>
       </Box>
+      {data ? login() : null}
     </Layout>
   );
 }
