@@ -37,7 +37,7 @@ const BackButton = styled.button`
   border: 2px solid rgb(125, 76, 219);
   color: rgb(125, 76, 219);
   width: 20rem;
-  margin: 0 auto;
+  margin: 1rem auto;
   transition: all 0.5s;
   background-color: transparent;
 
@@ -113,11 +113,6 @@ const Select = styled.select`
   }
 `;
 
-const ErrorMessage = styled.span`
-  color: tomato;
-  text-align: center;
-`;
-
 const CREATE_ELEMENT_MUTATION = gql`
   mutation createElement($name: String!, $description: String!, $post: Int!) {
     createElement(
@@ -134,7 +129,7 @@ function AddElement(props) {
   const [name, setName] = useState(null);
   const [description, setDescription] = useState(null);
 
-  const [createElement, { data, error }] = useMutation(
+  const [createElement, { }] = useMutation(
     CREATE_ELEMENT_MUTATION,
     {
       variables: {
@@ -142,17 +137,13 @@ function AddElement(props) {
         description: description,
         post: props.postID
       },
-      refetchQueries: ["FETCH_POST_DATA"]
+      refetchQueries: ["Post"],
+      onCompleted: () => (toggleMenu(), toast.success("Elemento adicionado")),
+      onError: () => (toast.error('Algo errado não está certo'))
     }
   );
 
   toast.configure();
-
-  function add() {
-    window.location.reload();
-    toast.success('Elemento adicionado')
-    return
-  }
 
   function toggleMenu() {
     setShow(!show);
@@ -184,13 +175,11 @@ function AddElement(props) {
             rows={10}
           />
           <Flex direction="column">
-            <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
             <RegisterButton onClick={() => createElement()}>
               Adicionar
             </RegisterButton>
-            {error ? <ErrorMessage>Algo errado não está certo</ErrorMessage> : null}
+            <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
           </Flex>
-          {data ? add() : null}
         </Form>
       </Menu>
     </>
