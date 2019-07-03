@@ -160,7 +160,13 @@ function AddArticle(props) {
         title: title,
         description: description,
         content: content
-      }
+      },
+      refetchQueries: ["posts", "repos"],
+      onCompleted: () => (
+        toggleMenu(),
+        toast.success("Trabalho Criado com sucesso"),
+        toast.info("Agora você pode adicionar elementos ao seu trabalho")
+      )
     }
   );
 
@@ -173,12 +179,6 @@ function AddArticle(props) {
   function handleMouseDown(e) {
     toggleMenu();
     e.stopPropagation();
-  }
-
-  function success() {
-    toast.success('Trabalho criado com sucesso');
-    toast.info('Agora você pode adicionar elementos ao seu trabalho')
-    return <Redirect to={`/article/id:${data.createPost.id}`} />;
   }
 
   return (
@@ -207,7 +207,6 @@ function AddArticle(props) {
             <option value="Física">Física</option>
             <option value="Computação">Computação</option>
           </Select>
-          {error ? <ErrorMessage>Algo errado não está certo</ErrorMessage> : null}
           <Flex>
             <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
             <RegisterButton onClick={() => createArticle()}>
@@ -215,7 +214,6 @@ function AddArticle(props) {
             </RegisterButton>
           </Flex>
         </Form>
-        {data ? success() : null}
       </Menu>
     </>
   );

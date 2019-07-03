@@ -38,7 +38,7 @@ const Box = styled.div`
 `;
 
 const FETCH_REPOS = gql`
-  query {
+  query repos{
     currentUser {
       posts {
         title
