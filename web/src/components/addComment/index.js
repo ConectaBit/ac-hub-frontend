@@ -40,12 +40,14 @@ const Button = styled.button`
 
 function AddComment(props) {
   const [comment, setComment] = useState(null);
-  console.log(props.postID)
-  const [createComment, { data, loading, error }] = useMutation(COMMENT_MUTATION, {
+  console.log(props.postID);
+  const [createComment, { loading }] = useMutation(COMMENT_MUTATION, {
     variables: {
       comment: comment,
       post: props.postID
-    }
+    },
+    refetchQueries: ["commentsByPost"],
+    onCompleted: () => setComment("")
   });
   return (
     <Wrapper>
@@ -53,9 +55,12 @@ function AddComment(props) {
         type="text"
         placeholder="Escreva um comentário"
         rows={5}
+        value={comment}
         onChange={e => setComment(e.target.value)}
       />
-      <Button onClick={() => createComment()}>{loading ? 'Enviando...' : 'Enviar'}</Button>
+      <Button onClick={() => createComment()}>
+        {loading ? "Enviando..." : "Enviar"}
+      </Button>
     </Wrapper>
   );
 }

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { toast } from "react-toastify";
-import { Redirect } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const Menu = styled.div`
@@ -129,19 +128,16 @@ function AddElement(props) {
   const [name, setName] = useState(null);
   const [description, setDescription] = useState(null);
 
-  const [createElement, { }] = useMutation(
-    CREATE_ELEMENT_MUTATION,
-    {
-      variables: {
-        name: name,
-        description: description,
-        post: props.postID
-      },
-      refetchQueries: ["Post"],
-      onCompleted: () => (toggleMenu(), toast.success("Elemento adicionado")),
-      onError: () => (toast.error('Algo errado não está certo'))
-    }
-  );
+  const [createElement] = useMutation(CREATE_ELEMENT_MUTATION, {
+    variables: {
+      name: name,
+      description: description,
+      post: props.postID
+    },
+    refetchQueries: ["Post"],
+    onCompleted: () => (toggleMenu(), toast.success("Elemento adicionado")),
+    onError: () => toast.error("Algo errado não está certo")
+  });
 
   toast.configure();
 

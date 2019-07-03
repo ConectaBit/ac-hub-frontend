@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   background-color: #fff;
   border-radius: 5px;
   flex:1;
+  overflow: -moz-hidden-unscrollable;
 `;
 
 const Flex = styled.div`
