@@ -127,7 +127,7 @@ function SideBar(props) {
   const [password, setPassword] = useState(null);
   const [inst, setInst] = useState(null);
 
-  const [createUser, { data, error }] = useMutation(CREATE_USER_MUTATION, {
+  const [createUser] = useMutation(CREATE_USER_MUTATION, {
     variables: {
       name: userName,
       email: email,

@@ -106,9 +106,6 @@ function Article(props) {
     variables: { id: getPostId() }
   });
 
-  console.log(getPostId());
-  console.log(data);
-
   return (
     <>
       <Header />
