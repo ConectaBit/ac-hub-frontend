@@ -159,10 +159,15 @@ function AddElement(props) {
             onChange={e => setName(e.target.value)}
             defaultValue={description}
           >
-            <option value="Introdução">Introdução</option>
+            <option value="Introdução">Introducão</option>
             <option value="Metodologia">Metodologia</option>
             <option value="Justificativa">Justificativa</option>
             <option value="Publicação">Publicação</option>
+            <option value="Problema">Problema</option>
+            <option value="Objetivo">Objetivo</option>
+            <option value="Resultado">Resultado</option>
+            <option value="Patente">Patente</option>
+            <option value="Hipótese">Hipótese</option>
           </Select>
           <Textarea
             type="text"
