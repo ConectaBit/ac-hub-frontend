@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./pages/home";
 import Feed from "./pages/feed";
 import Article from "./pages/article";
+import Explore from './pages/explore'
 import Logout from "./pages/logout";
 import { isAuth } from "./utils";
 
@@ -12,6 +13,7 @@ function Routes() {
       <Switch>
         <Route path="/feed" render={() => (isAuth() ? <Feed /> : <Home />)} />
         <Route path="/article/:id" render={(props) => isAuth() ? <Article articleID={props.match.params.id} /> : <Home />} />
+        <Route path='/explore' render={(props) => isAuth() ? <Explore /> : <Home />} />
         <Route exact path="/logout" component={Logout} />
         <Route path="/" render={() => (isAuth() ? <Feed /> : <Home />)} />
       </Switch>

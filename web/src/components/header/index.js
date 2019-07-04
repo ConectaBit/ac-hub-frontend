@@ -73,9 +73,11 @@ function Header() {
         <NavLink exact to='/'>
         <HomeIcon />
         </NavLink>
+        <NavLink to='/explore'>
         <ExploreIcon />
+        </NavLink>
         <GroupIcon />
-        <NavLink to='logout'>
+        <NavLink to='/logout'>
         <LogoutIcon />
         </NavLink>
       </IconsWrapper>
