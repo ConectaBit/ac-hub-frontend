@@ -133,23 +133,16 @@ function SideBar(props) {
       email: email,
       password: password,
       class: inst
-    }
+    },
+    onCompleted: () => (
+      toggleMenu(),
+      toast.success("Usuário criado com sucesso"),
+      toast.info("Entre com seu email e senha para continuar")
+    ),
+    onError: () => toast.error("Algo errado não está certo")
   });
 
   toast.configure();
-
-  function register() {
-    createUser();
-    if (data) {
-      toast.success("Usuário criado com sucesso!");
-      setShow(!show);
-      toast.warn("Entre com seu email e senha para continuar");
-    }
-
-    if (error) {
-      toast.error(`Este email já está cadastrado`);
-    }
-  }
 
   function toggleMenu() {
     setShow(!show);
@@ -189,7 +182,7 @@ function SideBar(props) {
           />
           <Flex>
             <BackButton onClick={() => toggleMenu()}>Voltar</BackButton>
-            <RegisterButton onClick={() => register()}>Avançar</RegisterButton>
+            <RegisterButton onClick={() => createUser()}>Avançar</RegisterButton>
           </Flex>
         </Form>
       </Menu>
