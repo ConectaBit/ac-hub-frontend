@@ -60,7 +60,7 @@ const Details = styled.div`
 
 const FETCH_POST_DATAS = gql`
   query {
-    posts(first: 20) {
+    posts(first: 30) {
       id
       title
       content

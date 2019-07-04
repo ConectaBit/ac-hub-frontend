@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Header from "../../components/header";
 import Card from "../../components/card";
+import ChemistryArticles from "../../components/chemistryArticles";
 
 const CardWrapper = styled.div`
   display: flex;
@@ -27,9 +28,8 @@ function Explore() {
         />
         <Card urlImage='https://upload.wikimedia.org/wikipedia/commons/3/3e/Charles_Robert_Darwin_by_John_Collier.jpg'
             title='Biologia'/>
-        <Card urlImage='http://2.bp.blogspot.com/-1yUQLl8smXY/T-U0G-YuTYI/AAAAAAAABEs/HsnEpK3bh0k/s1600/192747438103617.jpg'
-        title='Computação'/>
       </CardWrapper>
+      <ChemistryArticles start={1} />
     </>
   );
 }
