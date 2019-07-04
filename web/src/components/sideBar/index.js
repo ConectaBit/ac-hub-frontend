@@ -71,7 +71,7 @@ const Box = styled.div`
   flex: 1;
   background-color: #fff;
   align-self: flex-end;
-  background-image: url("https://i.pinimg.com/originals/b0/2e/89/b02e8993d9a498bef8130255beed11e8.jpg");
+  background-image: url("https://www.muralswallpaper.com/app/uploads/scientific-chalkboard-childrens-plain.jpg");
   background-size: cover;
   background-position: center;
 `;
