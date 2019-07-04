@@ -14,7 +14,7 @@ const CardWrapper = styled.div`
   width: 80%;
   overflow: scroll;
 
-  ::-webkit-scrollbar{
+  ::-webkit-scrollbar {
     display: none;
   }
 `;
@@ -45,6 +45,8 @@ function Explore() {
         return <PhisicsArticles start={1} />;
       case "biology":
         return <BiologyArticles start={1} />;
+      default:
+        return <ChemistryArticles start={1} />;
     }
   }
 
@@ -77,9 +79,7 @@ function Explore() {
           />
         </Button>
       </CardWrapper>
-      <Layout>
-      {reducer(area)}
-      </Layout>
+      <Layout>{reducer(area)}</Layout>
     </>
   );
 }

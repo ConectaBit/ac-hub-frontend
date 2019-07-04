@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { toast } from "react-toastify";
-import { Redirect } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const Menu = styled.div`
@@ -125,11 +124,6 @@ const Select = styled.select`
   }
 `;
 
-const ErrorMessage = styled.span`
-  color: tomato;
-  text-align: center;
-`;
-
 const CREATE_ARTICLE_MUTATION = gql`
   mutation createPost(
     $title: String!
@@ -153,7 +147,7 @@ function AddArticle(props) {
   const [description, setDescription] = useState(null);
   const [content, setContent] = useState("Matemática");
 
-  const [createArticle, { data, error }] = useMutation(
+  const [createArticle] = useMutation(
     CREATE_ARTICLE_MUTATION,
     {
       variables: {
